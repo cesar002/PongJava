@@ -5,17 +5,30 @@
  */
 package pongjava.src.Views;
 
+import pongjava.src.Controllers.BallController;
+import pongjava.src.Controllers.CPUPlayerController;
+import pongjava.src.Controllers.GameController;
+import pongjava.src.Controllers.PlayerController;
+import pongjava.src.Controllers.ScoreController;
+
 /**
  *
  * @author Soulu
  */
 public class PongPrincipalView extends javax.swing.JFrame {
-
-    /**
-     * Creates new form PongPrincipalView
-     */
+    
+    private GameController gameController;
+    
     public PongPrincipalView() {
         initComponents();
+       
+        this.init();
+    }
+    
+    
+    public void init(){
+        this.gameController = new GameController(new BallController(lblBall), new CPUPlayerController(lblRacketCPU), new PlayerController(this.lblRacketPlayer));
+        ScoreController.setLabelsScores(this.lblCountPlayer, this.lblCountCPU);
     }
 
     /**
@@ -29,78 +42,52 @@ public class PongPrincipalView extends javax.swing.JFrame {
 
         pnlContainer = new javax.swing.JPanel();
         lblCountCPU = new javax.swing.JLabel();
-        lblCountPlayer1 = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
+        lblCountPlayer = new javax.swing.JLabel();
         lblRacketPlayer = new javax.swing.JLabel();
         lblRacketCPU = new javax.swing.JLabel();
+        lblBall = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pong Java");
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         pnlContainer.setBackground(new java.awt.Color(0, 0, 0));
+        pnlContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblCountCPU.setFont(new java.awt.Font("Consolas", 2, 36)); // NOI18N
         lblCountCPU.setForeground(new java.awt.Color(255, 255, 255));
         lblCountCPU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCountCPU.setText("0");
+        pnlContainer.add(lblCountCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(335, 6, 45, -1));
 
-        lblCountPlayer1.setFont(new java.awt.Font("Consolas", 2, 36)); // NOI18N
-        lblCountPlayer1.setForeground(new java.awt.Color(255, 255, 255));
-        lblCountPlayer1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblCountPlayer1.setText("0");
-
-        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
-        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        lblCountPlayer.setFont(new java.awt.Font("Consolas", 2, 36)); // NOI18N
+        lblCountPlayer.setForeground(new java.awt.Color(255, 255, 255));
+        lblCountPlayer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCountPlayer.setText("0");
+        pnlContainer.add(lblCountPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 6, 41, -1));
 
         lblRacketPlayer.setBackground(new java.awt.Color(255, 255, 255));
         lblRacketPlayer.setForeground(new java.awt.Color(255, 255, 255));
         lblRacketPlayer.setOpaque(true);
+        pnlContainer.add(lblRacketPlayer, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 200, 13, 55));
 
         lblRacketCPU.setBackground(new java.awt.Color(255, 255, 255));
         lblRacketCPU.setForeground(new java.awt.Color(255, 255, 255));
         lblRacketCPU.setOpaque(true);
+        pnlContainer.add(lblRacketCPU, new org.netbeans.lib.awtextra.AbsoluteConstraints(616, 181, 14, 55));
 
-        javax.swing.GroupLayout pnlContainerLayout = new javax.swing.GroupLayout(pnlContainer);
-        pnlContainer.setLayout(pnlContainerLayout);
-        pnlContainerLayout.setHorizontalGroup(
-            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContainerLayout.createSequentialGroup()
-                .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlContainerLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblCountPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(pnlContainerLayout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(lblRacketPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(69, 292, Short.MAX_VALUE)))
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlContainerLayout.createSequentialGroup()
-                        .addComponent(lblCountCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(267, 267, 267))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContainerLayout.createSequentialGroup()
-                        .addComponent(lblRacketCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(15, 15, 15))))
-        );
-        pnlContainerLayout.setVerticalGroup(
-            pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
-            .addGroup(pnlContainerLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCountCPU)
-                    .addComponent(lblCountPlayer1))
-                .addGroup(pnlContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlContainerLayout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addComponent(lblRacketPlayer, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(pnlContainerLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(lblRacketCPU, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
+        lblBall.setBackground(new java.awt.Color(255, 255, 255));
+        lblBall.setOpaque(true);
+        pnlContainer.add(lblBall, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 13, 13));
+
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+        pnlContainer.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 0, -1, 416));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,6 +104,14 @@ public class PongPrincipalView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if(evt.getKeyCode() == 38){
+            this.gameController.moveUpPlayer();
+        }else if(evt.getKeyCode() == 40){
+            this.gameController.moveDownPlayer();
+        }
+    }//GEN-LAST:event_formKeyPressed
 
     /**
      * @param args the command line arguments
@@ -155,8 +150,9 @@ public class PongPrincipalView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblBall;
     private javax.swing.JLabel lblCountCPU;
-    private javax.swing.JLabel lblCountPlayer1;
+    private javax.swing.JLabel lblCountPlayer;
     private javax.swing.JLabel lblRacketCPU;
     private javax.swing.JLabel lblRacketPlayer;
     private javax.swing.JPanel pnlContainer;

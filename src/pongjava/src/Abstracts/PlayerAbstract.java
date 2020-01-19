@@ -13,11 +13,13 @@ import javax.swing.JLabel;
  */
 public abstract class PlayerAbstract {
     protected JLabel player = null;
+    protected int limitMove = 360;
     
-    public void setLabelPlayer(JLabel player){
+    public PlayerAbstract(JLabel player){
         this.player = player;
     }
     
     public abstract void moverse(int yPosition);
+    
     
 }
