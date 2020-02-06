@@ -39,7 +39,7 @@ public class BallController {
             try{
                 while(true){
                     this.ball.setBounds(this.positionX, this.positionY, this.ballWidth, this.ballWidth);
-                    Thread.sleep(40);
+                    Thread.sleep(41);
                     
                     this.positionX = this.positionX + this.speedX;
                     this.positionY = this.positionY + this.speedY;   
