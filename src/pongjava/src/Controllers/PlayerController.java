@@ -20,18 +20,15 @@ public class PlayerController extends PlayerAbstract{
 
     @Override
     public void moverse(int yPosition) {
-        int position = this.player.getY();
-        int newPosition = position == 0 ? 1 : position + yPosition;
-        if(position < this.limitMove && position > 0){
-            this.player.setBounds(this.player.getX(), newPosition, this.player.getWidth(), this.player.getHeight());
-        }else{
-            if(newPosition == 355){
-                this.player.setBounds(this.player.getX(), 350, this.player.getWidth(), this.player.getHeight());
-            }
-            
-            if(newPosition == 1){
-                this.player.setBounds(this.player.getX(), 5, this.player.getWidth(), this.player.getHeight());
-            }
+        int newPosition = this.player.getY() + yPosition;
+        
+        this.player.setBounds(this.player.getX(), newPosition, this.player.getWidth(), this.player.getHeight());
+        
+        if(this.player.getY() >= this.limitMove){
+            this.player.setBounds(this.player.getX(), this.limitMove, this.player.getWidth(), this.player.getHeight());
+        }
+        if(this.player.getY() <= 0){
+            this.player.setBounds(this.player.getX(), 0, this.player.getWidth(), this.player.getHeight());
         }
     }
     

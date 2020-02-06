@@ -27,8 +27,9 @@ public class PongPrincipalView extends javax.swing.JFrame {
     
     
     public void init(){
-        this.gameController = new GameController(new BallController(lblBall), new CPUPlayerController(lblRacketCPU), new PlayerController(this.lblRacketPlayer));
+        this.gameController = new GameController(new BallController(this.lblBall, this.lblRacketPlayer, this.lblRacketCPU), new CPUPlayerController(lblRacketCPU), new PlayerController(this.lblRacketPlayer));
         ScoreController.setLabelsScores(this.lblCountPlayer, this.lblCountCPU);
+        this.gameController.moveBall();
     }
 
     /**
@@ -93,7 +94,9 @@ public class PongPrincipalView extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnlContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 652, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,9 +109,9 @@ public class PongPrincipalView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
-        if(evt.getKeyCode() == 38){
+        if(evt.getKeyCode() == 38 || evt.getKeyCode() == 87){
             this.gameController.moveUpPlayer();
-        }else if(evt.getKeyCode() == 40){
+        }else if(evt.getKeyCode() == 40 || evt.getKeyCode() == 83){
             this.gameController.moveDownPlayer();
         }
     }//GEN-LAST:event_formKeyPressed

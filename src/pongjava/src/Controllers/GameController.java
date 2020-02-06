@@ -10,6 +10,7 @@ package pongjava.src.Controllers;
  * @author Soulu
  */
 public class GameController {
+    private final int speedPlayer = 30;
     private BallController ballController = null;
     private CPUPlayerController CPUplayerController = null;
     private PlayerController playerController = null;
@@ -21,11 +22,15 @@ public class GameController {
     }
     
     public void moveUpPlayer(){
-        this.playerController.moverse(-5);
+        this.playerController.moverse((this.speedPlayer * -1));
     }
     
     public void moveDownPlayer(){
-        this.playerController.moverse(5);
+        this.playerController.moverse(this.speedPlayer);
+    }
+    
+    public void moveBall(){
+        this.ballController.mover();
     }
     
 }
